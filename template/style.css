@@ -1,0 +1,126 @@
+/* index.html */
+
+/*-- Card start --*/
+.sec{
+  padding: 10px 5%;
+}
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+.products .card {
+  width: 250px;
+  background: #fff;
+  box-shadow: 0px 5px 10px #ddd;
+  border-radius: 15px;
+  padding: 5px;
+  margin-bottom: 20px;
+  bottom: 100px;
+}
+
+.products img {
+  height: 250px;
+  width: 100%;
+}
+
+.products .card .title {
+  font-weight: 900;
+  font-size: 20px;
+  color: #000000;
+  padding: 0 20px;
+}
+
+.products .card .box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.products .card .box .price {
+  color: #000000;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+
+/*-- Card end --*/
+/*-- Navbar start --*/
+
+nav {
+position: fixed;
+left: 0;
+top: 0;
+height: 75px;
+width: 100%;
+background: #fff;
+box-shadow: 0px 5px 10px #ddd;
+}
+
+nav .navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  width: 90%;
+  margin: auto;
+}
+
+nav .navbar .logo a{
+  color: #000000;
+  font-size: 27px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+nav .navbar .menu {
+  display: flex;
+}
+
+.navbar .menu li{
+  list-style: none;
+  margin: 0 15px;
+}
+
+.navbar .menu li a{
+  color: #000000;
+font-size: 17px;
+font-weight: 500;
+text-decoration: none;
+}
+
+
+.menu, .select {
+ color: red;
+}
+
+#select {
+  color: red;
+}
+
+/*-- Navbar end--*/
+/*-- Account Box start --*/
+
+.accountbox {
+  width: 700px auto;
+  margin: 150px;
+  padding: 50px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+.categories {
+  justify-content: space-between;
+  text-align: center;
+  text-indent: 15px;
+
+}
+
+.categories a {
+  font-size: 18px;
+  font-weight: bold;
+}
+/*-- Account Box end --*/
