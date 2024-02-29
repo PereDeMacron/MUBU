@@ -1,0 +1,32 @@
+[
+  {
+    "productId": 1,
+    "text": "AJ4 Fire Red",
+    "src": "images/img-4.jpg",
+    "label": "189,99€"
+  },
+  {
+    "productId": 2,
+    "text": "Product 2",
+    "src": "product1.jpg",
+    "label": "New"
+  },
+  {
+    "productId": 3,
+    "text": "Product 3",
+    "src": "images/img-3.jpg",
+    "label": "Price 3"
+  },
+  {
+    "productId": 4,
+    "text": "Product 4",
+    "src": "images/img-10.jpg",
+    "label": "Price 4"
+  },
+  {
+    "productId": 5,
+    "text": "Product 5",
+    "src": "images/img-8.jpg",
+    "label": "Price 5"
+  }
+]
