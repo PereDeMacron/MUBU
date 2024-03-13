@@ -21,7 +21,7 @@ export const Button = ({
   return (
     <Link to={destination} className="btn-mobile">
       {" "}
-      {/* Use the destination prop here */}
+      {}
       <button
         className={`btn ${checkButtonStyle} ${checkButtonSize}`}
         onClick={onClick}

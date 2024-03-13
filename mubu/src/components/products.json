@@ -2,31 +2,44 @@
   {
     "productId": 1,
     "text": "AJ4 Fire Red",
-    "src": "images/img-4.jpg",
-    "label": "189,99€"
+    "src": "images/img-1.jpg",
+    "label": "179,99 €",
+    "alt": "Shoe"
   },
   {
     "productId": 2,
-    "text": "Product 2",
-    "src": "product1.jpg",
-    "label": "New"
+    "text": "Nike Dunk SB OFF WHITE 50/50",
+    "src": "images/img-2.jpg",
+    "label": "649,99 €",
+    "alt": "Shoe"
   },
   {
     "productId": 3,
-    "text": "Product 3",
+    "text": "Nike air force 1",
     "src": "images/img-3.jpg",
-    "label": "Price 3"
+    "label": "114,99 €",
+    "alt": "Shoe"
   },
   {
     "productId": 4,
-    "text": "Product 4",
-    "src": "images/img-10.jpg",
-    "label": "Price 4"
+    "text": "Balenciaga track",
+    "src": "images/img-4.jpg",
+    "label": "879,99 €",
+    "alt": "Shoe"
   },
   {
     "productId": 5,
-    "text": "Product 5",
-    "src": "images/img-8.jpg",
-    "label": "Price 5"
+    "text": "Nike dunk sb paris",
+    "src": "images/img-5.jpg",
+    "label": "44.999,99 €",
+    "alt": "Shoe"
+  },
+  {
+    "productId": 6,
+    "text": "gros caca boudin",
+    "src": "images/img-6.jpg",
+    "label": "239,99 €",
+    "alt": "Shoe"
+    
   }
 ]

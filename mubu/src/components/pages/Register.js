@@ -1,12 +1,12 @@
 import React from "react";
 import "../../App.css";
-import Mail from "../Mail";
+import RegisterMail from "../RegisterMail";
 
 
 function Register() {
   return (
     <>
-      <Mail />
+      <RegisterMail />
     </>
   );
 }

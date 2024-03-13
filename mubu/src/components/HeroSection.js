@@ -10,6 +10,14 @@ function HeroSection() {
       <h1>MUBU33</h1>
       <div className="hero-btns">
         <Button
+          destination="/about"
+          className="btns"
+          buttonStyle="btn--outline"
+          buttonSize="btn--large"
+        >
+          À PROPOS
+        </Button>
+        <Button
           destination="/register"
           className="btns"
           buttonStyle="btn--outline"
@@ -18,7 +26,7 @@ function HeroSection() {
           S'ENREGISTRER
         </Button>
         <Button
-        destination="/products"
+          destination="/products"
           className="btns"
           buttonStyle="btn--primary"
           buttonSize="btn--large"

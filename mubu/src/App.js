@@ -5,18 +5,19 @@ import Home from './components/pages/Home'
 import Main from "./components/pages/Main";
 import Products from "./components/pages/Products";
 import Register from "./components/pages/Register";
-import ItemSection from './components/ItemSection';
+import ProductPage from './components/pages/ProductPage';
+import About from './components/pages/About';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
         <Route path="/main" element={<Main />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/product/:productId" element={<ProductPage />} />
         <Route path="/products" element={<Products />} />
-        <Route path="/products/:productId" element={<Products />} />
-        <Route path="/item" element={<ItemSection />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </BrowserRouter>
   );
