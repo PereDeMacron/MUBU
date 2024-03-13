@@ -20,7 +20,7 @@ function ProductDetails() {
         class="item__img"
         alt={product.alt}
       />
-      <h2 className="article">{product.text}</h2>
+      <h2 className="articlew">{product.text}</h2>
       <p className="price">{product.label}</p>
     </div>
   );
