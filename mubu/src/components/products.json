@@ -4,42 +4,175 @@
     "text": "AJ4 Fire Red",
     "src": "images/img-1.jpg",
     "label": "179,99 €",
-    "alt": "Shoe"
+    "alt": "Shoe",
+    "sizes": [
+      { "size": "39", "available": true },
+      { "size": "40", "available": true },
+      { "size": "41", "available": false },
+      { "size": "42", "available": true },
+      { "size": "43", "available": true },
+      { "size": "44", "available": false },
+      { "size": "45", "available": true }
+    ]
   },
   {
     "productId": 2,
     "text": "Nike Dunk SB OFF WHITE 50/50",
     "src": "images/img-2.jpg",
     "label": "649,99 €",
-    "alt": "Shoe"
+    "alt": "Shoe",
+    "sizes": [
+      { "size": "39", "available": true },
+      { "size": "40", "available": true },
+      { "size": "41", "available": true },
+      { "size": "42", "available": true },
+      { "size": "43", "available": true },
+      { "size": "44", "available": true },
+      { "size": "45", "available": true }
+    ]
   },
   {
     "productId": 3,
     "text": "Nike air force 1",
     "src": "images/img-3.jpg",
     "label": "114,99 €",
-    "alt": "Shoe"
+    "alt": "Shoe",
+    "sizes": [
+      { "size": "39", "available": true },
+      { "size": "40", "available": true },
+      { "size": "41", "available": false },
+      { "size": "42", "available": true },
+      { "size": "43", "available": true },
+      { "size": "44", "available": false },
+      { "size": "45", "available": true }
+    ]
   },
   {
     "productId": 4,
     "text": "Balenciaga track",
     "src": "images/img-4.jpg",
     "label": "879,99 €",
-    "alt": "Shoe"
+    "alt": "Shoe",
+    "sizes": [
+      { "size": "39", "available": true },
+      { "size": "40", "available": true },
+      { "size": "41", "available": false },
+      { "size": "42", "available": true },
+      { "size": "43", "available": true },
+      { "size": "44", "available": false },
+      { "size": "45", "available": true }
+    ]
   },
   {
     "productId": 5,
     "text": "Nike dunk sb paris",
     "src": "images/img-5.jpg",
     "label": "44.999,99 €",
-    "alt": "Shoe"
+    "alt": "Shoe",
+    "sizes": [
+      { "size": "39", "available": true },
+      { "size": "40", "available": true },
+      { "size": "41", "available": false },
+      { "size": "42", "available": true },
+      { "size": "43", "available": true },
+      { "size": "44", "available": false },
+      { "size": "45", "available": true }
+    ]
   },
   {
     "productId": 6,
     "text": "gros caca boudin",
     "src": "images/img-6.jpg",
     "label": "239,99 €",
-    "alt": "Shoe"
-    
+    "alt": "Shoe",
+    "sizes": [
+      { "size": "39", "available": true },
+      { "size": "40", "available": true },
+      { "size": "41", "available": false },
+      { "size": "42", "available": true },
+      { "size": "43", "available": true },
+      { "size": "44", "available": false },
+      { "size": "45", "available": true }
+    ]
+  },
+  {
+    "productId": 6,
+    "text": "gros caca boudin",
+    "src": "images/img-6.jpg",
+    "label": "239,99 €",
+    "alt": "Shoe",
+    "sizes": [
+      { "size": "39", "available": true },
+      { "size": "40", "available": true },
+      { "size": "41", "available": false },
+      { "size": "42", "available": true },
+      { "size": "43", "available": true },
+      { "size": "44", "available": false },
+      { "size": "45", "available": true }
+    ]
+  },
+  {
+    "productId": 6,
+    "text": "gros caca boudin",
+    "src": "images/img-6.jpg",
+    "label": "239,99 €",
+    "alt": "Shoe",
+    "sizes": [
+      { "size": "39", "available": true },
+      { "size": "40", "available": true },
+      { "size": "41", "available": false },
+      { "size": "42", "available": true },
+      { "size": "43", "available": true },
+      { "size": "44", "available": false },
+      { "size": "45", "available": true }
+    ]
+  },
+  {
+    "productId": 6,
+    "text": "gros caca boudin",
+    "src": "images/img-6.jpg",
+    "label": "239,99 €",
+    "alt": "Shoe",
+    "sizes": [
+      { "size": "39", "available": true },
+      { "size": "40", "available": true },
+      { "size": "41", "available": false },
+      { "size": "42", "available": true },
+      { "size": "43", "available": true },
+      { "size": "44", "available": false },
+      { "size": "45", "available": true }
+    ]
+  },
+  {
+    "productId": 6,
+    "text": "gros caca boudin",
+    "src": "images/img-6.jpg",
+    "label": "239,99 €",
+    "alt": "Shoe",
+    "sizes": [
+      { "size": "39", "available": true },
+      { "size": "40", "available": true },
+      { "size": "41", "available": false },
+      { "size": "42", "available": true },
+      { "size": "43", "available": true },
+      { "size": "44", "available": false },
+      { "size": "45", "available": true }
+    ]
+  },
+  {
+    "productId": 6,
+    "text": "gros caca boudin",
+    "src": "images/img-6.jpg",
+    "label": "239,99 €",
+    "alt": "Shoe",
+    "sizes": [
+      { "size": "39", "available": true },
+      { "size": "40", "available": true },
+      { "size": "41", "available": false },
+      { "size": "42", "available": true },
+      { "size": "43", "available": true },
+      { "size": "44", "available": false },
+      { "size": "45", "available": true }
+    ]
   }
 ]
