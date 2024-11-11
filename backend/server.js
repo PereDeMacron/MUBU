@@ -9,7 +9,6 @@ const app = express(); // Express app
 app.use(cors());
 app.use(express.json());
 
-// Create a MySQL connection pool
 const db = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
@@ -18,7 +17,6 @@ const db = mysql.createPool({
   port: process.env.DB_PORT,
 });
 
-// Test the connection
 db.getConnection((err) => {
   if (err) {
     console.error("Error connecting to the database:", err);
@@ -27,7 +25,6 @@ db.getConnection((err) => {
   }
 });
 
-// Signup route
 app.post("/signup", async (req, res) => {
   const { first_name, last_name, email, password, isAdmin } = req.body;
 
@@ -56,7 +53,6 @@ app.post("/signup", async (req, res) => {
   }
 });
 
-// Login route
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
@@ -199,7 +195,6 @@ app.delete("/cart/:userId/:productId", (req, res) => {
 
 app.delete("/cart/:userId", (req, res) => {
   const userId = req.params.userId;
-  // Remove all cart items for this user from the database
   db.query("DELETE FROM cart WHERE user_id = ?", [userId], (err, result) => {
     if (err) {
       console.error("Error clearing cart:", err);
