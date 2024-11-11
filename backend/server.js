@@ -1,24 +1,23 @@
 require("dotenv").config();
 
 const express = require("express"); // Web server framework
-const mysql = require("mysql2"); // MySQL db client
+const { Client } = require("pg");
 const cors = require("cors"); // Cross Origin Resource Sharing
 const bcrypt = require("bcrypt"); // Password hasher
-
 const app = express(); // Express app
 
 app.use(cors());
 app.use(express.json());
 
-const db = mysql.createPool({
-  host: "localhost",
-  user: "root",
-  password: "StrongP@ssw0rd2024!",
-  database: "login_sample_db",
-  port: 3306,
-  waitForConnections: true,
-  connectionLimit: 10,
-  queueLimit: 0,
+const db = new Client({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE,
+  port: process.env.DB_PORT,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
 
 db.getConnection((err) => {
