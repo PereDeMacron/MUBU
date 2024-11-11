@@ -1,0 +1,4 @@
+[ZoneTransfer]
+ZoneId=3
+ReferrerUrl=https://cloudconvert.com/
+HostUrl=https://eu-central.storage.cloudconvert.com/tasks/4b2c1cd1-98bd-4df6-9139-759903e5988e/nike-shox-tl.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=cloudconvert-production%2F20241028%2Ffra%2Fs3%2Faws4_request&X-Amz-Date=20241028T214607Z&X-Amz-Expires=86400&X-Amz-Signature=51adaf3fde1edf42d73f8b92d111caa17fb9b3b13fd33416c8c93c3783c64a34&X-Amz-SignedHeaders=host&response-content-disposition=attachment%3B%20filename%3D%22nike-shox-tl.png%22&response-content-type=image%2Fpng&x-id=GetObject
