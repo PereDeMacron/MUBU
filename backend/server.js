@@ -1,7 +1,7 @@
 require("dotenv").config();
 
+const mysql = require("mysql"); // Add this line at the top
 const express = require("express"); // Web server framework
-const { Client } = require("pg");
 const cors = require("cors"); // Cross Origin Resource Sharing
 const bcrypt = require("bcrypt"); // Password hasher
 const app = express(); // Express app
@@ -9,17 +9,16 @@ const app = express(); // Express app
 app.use(cors());
 app.use(express.json());
 
-const db = new Client({
+// Create a MySQL connection pool
+const db = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
   port: process.env.DB_PORT,
-  ssl: {
-    rejectUnauthorized: false,
-  },
 });
 
+// Test the connection
 db.getConnection((err) => {
   if (err) {
     console.error("Error connecting to the database:", err);
@@ -28,6 +27,7 @@ db.getConnection((err) => {
   }
 });
 
+// Signup route
 app.post("/signup", async (req, res) => {
   const { first_name, last_name, email, password, isAdmin } = req.body;
 
@@ -56,6 +56,7 @@ app.post("/signup", async (req, res) => {
   }
 });
 
+// Login route
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
