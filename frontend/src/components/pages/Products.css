@@ -40,7 +40,7 @@ h1 {
 .cards__item__pic-wrap {
   position: relative;
   width: 100%;
-  padding-top: 67%; /* Aspect ratio to maintain consistency */
+  padding-top: 67%;
   overflow: hidden;
 }
 
@@ -93,4 +93,24 @@ h1 {
   .cards__item {
     margin-bottom: 2rem;
   }
+}
+
+.sort-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 625px;
+}
+
+.sort-button {
+  padding: 10px 20px;
+  margin: 20px 0;
+  background-color: #242424;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.sort-button:hover {
+  background-color: #424242;
 }

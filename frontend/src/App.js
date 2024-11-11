@@ -11,6 +11,7 @@ import Account from "./components/pages/Account";
 import ProtectedRoute from "./components/ProtectedRoute";
 import ManageProducts from "./components/pages/ManageProducts";
 import Cart from "./components/pages/Cart";
+import CheckoutPage from "./components/pages/CheckoutPage";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/register" element={<SignUpLogin />} />
         <Route path="/manage" element={<ManageProducts />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/checkout" element={<CheckoutPage />} />
         <Route
           path="/account"
           element={

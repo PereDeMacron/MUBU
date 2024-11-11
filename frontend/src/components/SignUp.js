@@ -31,10 +31,9 @@ function SignUpLogin() {
 
       if (response.ok) {
         const result = await response.json();
-        console.log("Response data:", result); // Log the full response data
+        console.log("Response data:", result);
 
         if (isLogin) {
-          // Ensure response contains userId and log it
           console.log(
             "User ID:",
             result.userDetails
@@ -44,11 +43,11 @@ function SignUpLogin() {
 
           if (result.userDetails && result.userDetails.userId) {
             localStorage.setItem("isLoggedIn", "true");
-            localStorage.setItem("userId", result.userDetails.userId); // Store userId directly
+            localStorage.setItem("userId", result.userDetails.userId);
             localStorage.setItem(
               "userDetails",
               JSON.stringify(result.userDetails)
-            ); // Save user details
+            );
             console.log("Data stored in localStorage.");
           }
         }
@@ -57,62 +56,6 @@ function SignUpLogin() {
       } else {
         const errorData = await response.json();
         console.error("Error:", errorData);
-      }
-    } catch (error) {
-      console.error("Network error:", error);
-    }
-  };
-
-  // Inside the cart action
-  const addToCart = async (productId, size) => {
-    const userId = localStorage.getItem("userId");
-    if (!userId) {
-      console.error("User not logged in");
-      return;
-    }
-
-    const data = {
-      productId,
-      size,
-      userId,
-    };
-
-    try {
-      const response = await fetch("http://localhost:8081/cart", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-
-      if (response.ok) {
-        console.log("Item added to cart");
-      } else {
-        const errorData = await response.json();
-        console.error("Error:", errorData);
-      }
-    } catch (error) {
-      console.error("Network error:", error);
-    }
-  };
-
-  const fetchCartItems = async () => {
-    const userId = localStorage.getItem("userId");
-    if (!userId) {
-      console.error("User not logged in");
-      return;
-    }
-
-    try {
-      const response = await fetch(`http://localhost:8081/cart/${userId}`);
-      if (response.ok) {
-        const cartItems = await response.json();
-        console.log(cartItems);
-        // Display cart items
-      } else {
-        const errorData = await response.json();
-        console.error("Error fetching cart:", errorData);
       }
     } catch (error) {
       console.error("Network error:", error);

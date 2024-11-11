@@ -18,7 +18,7 @@ const LandingSection = () => {
     }, 4000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [images.length]);
 
   const goToSlide = (index) => {
     setCurrentImageIndex(index);

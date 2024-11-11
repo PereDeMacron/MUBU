@@ -1,20 +1,15 @@
-// Load environment variables from .env file
 require("dotenv").config();
 
-// Import dependencies
 const express = require("express"); // Web server framework
-const mysql = require("mysql2"); // MySQL database client (mysql2 is preferred for promises support)
-const cors = require("cors"); // Cross-origin resource sharing
-const bcrypt = require("bcrypt"); // Password hashing
-const path = require("path"); // Utilities for handling file paths
+const mysql = require("mysql2"); // MySQL db client
+const cors = require("cors"); // Cross Origin Resource Sharing
+const bcrypt = require("bcrypt"); // Password hasher
 
-const app = express(); // Initialize Express app
+const app = express(); // Express app
 
-// Enable CORS and JSON parsing in requests
 app.use(cors());
 app.use(express.json());
 
-// Set up MySQL database connection
 const db = mysql.createPool({
   host: "localhost",
   user: "root",
@@ -26,7 +21,6 @@ const db = mysql.createPool({
   queueLimit: 0,
 });
 
-// MySQL connection test
 db.getConnection((err) => {
   if (err) {
     console.error("Error connecting to the database:", err);
@@ -35,12 +29,10 @@ db.getConnection((err) => {
   }
 });
 
-// Signup route: creates a new user
 app.post("/signup", async (req, res) => {
   const { first_name, last_name, email, password, isAdmin } = req.body;
 
   try {
-    // Hash the password for security
     const hashedPassword = await bcrypt.hash(password, 10);
     const sql =
       "INSERT INTO users (first_name, last_name, email, password, is_admin) VALUES (?, ?, ?, ?, ?)";
@@ -52,7 +44,6 @@ app.post("/signup", async (req, res) => {
       isAdmin ? 1 : 0,
     ];
 
-    // Insert new user data into database
     db.query(sql, values, (err, result) => {
       if (err) {
         console.error("Signup Failed:", err);
@@ -66,7 +57,6 @@ app.post("/signup", async (req, res) => {
   }
 });
 
-// Login route: checks user credentials
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
@@ -100,14 +90,12 @@ app.post("/login", async (req, res) => {
 });
 
 app.post("/logout", (req, res) => {
-  // Clear the session or token here
   res.status(200).json({ message: "Logged out successfully" });
 });
 
-// Password change route: updates user password
 app.post("/change-password", async (req, res) => {
   const { currentPassword, newPassword } = req.body;
-  const userId = 1; // Assume a fixed user for simplicity
+  const userId = 1;
 
   const sql = "SELECT password FROM users WHERE user_id = ?";
   db.query(sql, [userId], async (err, data) => {
@@ -135,9 +123,8 @@ app.post("/change-password", async (req, res) => {
   });
 });
 
-// Orders route: fetches orders for a specific user
 app.get("/orders", (req, res) => {
-  const userId = 1; // Assume a fixed user
+  const userId = 1;
 
   const sql = "SELECT * FROM orders WHERE user_id = ?";
   db.query(sql, [userId], (err, data) => {
@@ -148,7 +135,6 @@ app.get("/orders", (req, res) => {
   });
 });
 
-// Fetch all items route: retrieves all items in the store
 app.get("/items", (req, res) => {
   const sql = "SELECT * FROM item ORDER BY id ASC";
   db.query(sql, (err, data) => {
@@ -158,17 +144,71 @@ app.get("/items", (req, res) => {
     const itemsWithSizes = data.map((item) => ({
       ...item,
       sizes: [
-        { size: "S", available: true },
-        { size: "M", available: false },
-        { size: "L", available: true },
-        { size: "XL", available: true },
+        { size: "41", available: true },
+        { size: "42", available: false },
+        { size: "43", available: true },
+        { size: "44", available: true },
       ],
     }));
     res.status(200).json(itemsWithSizes);
   });
 });
 
-// Fetch single item by ID route
+app.put("/items/:id", (req, res) => {
+  const { id } = req.params;
+  const { text, src, label, alt } = req.body;
+
+  const sql =
+    "UPDATE item SET text = ?, src = ?, label = ?, alt = ? WHERE id = ?";
+  const values = [text, src, label, alt, id];
+
+  db.query(sql, values, (err, result) => {
+    if (err) {
+      console.error("Error updating item:", err);
+      return res.status(500).json("Error updating item");
+    }
+    if (result.affectedRows === 0) {
+      return res.status(404).json("Item not found");
+    }
+    res.status(200).json("Item updated successfully");
+  });
+});
+
+app.delete("/cart/:userId/:productId", (req, res) => {
+  const { userId, productId } = req.params;
+
+  const query = "DELETE FROM cart WHERE user_id = ? AND product_id = ?";
+
+  db.query(query, [userId, productId], (err, result) => {
+    if (err) {
+      console.error("Error deleting cart item:", err);
+      return res
+        .status(500)
+        .json({ message: "Server error while deleting cart item" });
+    }
+
+    if (result.affectedRows > 0) {
+      return res
+        .status(200)
+        .json({ message: "Cart item deleted successfully" });
+    } else {
+      return res.status(404).json({ message: "Cart item not found" });
+    }
+  });
+});
+
+app.delete("/cart/:userId", (req, res) => {
+  const userId = req.params.userId;
+  // Remove all cart items for this user from the database
+  db.query("DELETE FROM cart WHERE user_id = ?", [userId], (err, result) => {
+    if (err) {
+      console.error("Error clearing cart:", err);
+      return res.status(500).send("Error clearing cart");
+    }
+    res.status(200).send("Cart cleared successfully");
+  });
+});
+
 app.get("/items/:id", (req, res) => {
   const { id } = req.params;
   db.query("SELECT * FROM item WHERE id = ?", [id], (err, rows) => {
@@ -183,7 +223,6 @@ app.get("/items/:id", (req, res) => {
   });
 });
 
-// Add new item route: inserts a new product into the database
 app.post("/items", (req, res) => {
   const { text, src, label, alt } = req.body;
   const sql = "INSERT INTO item (text, src, label, alt) VALUES (?, ?, ?, ?)";
@@ -198,10 +237,9 @@ app.post("/items", (req, res) => {
   });
 });
 
-// Add item to cart route
 app.post("/cart", (req, res) => {
   const { productId, size } = req.body;
-  const userId = req.body.userId || req.headers["user-id"]; // Make sure userId is passed from the frontend
+  const userId = req.body.userId || req.headers["user-id"];
 
   if (!userId) {
     return res
@@ -209,7 +247,6 @@ app.post("/cart", (req, res) => {
       .json({ error: "User ID is required to add an item to the cart" });
   }
 
-  // Add the product to the cart in the database
   db.query(
     "INSERT INTO cart (user_id, product_id, size) VALUES (?, ?, ?)",
     [userId, productId, size],
@@ -223,7 +260,6 @@ app.post("/cart", (req, res) => {
   );
 });
 
-// Get user's cart items
 app.get("/cart/:userId", (req, res) => {
   const { userId } = req.params;
 
@@ -249,14 +285,12 @@ app.get("/cart/:userId", (req, res) => {
 app.delete("/cart/:userId/:productId/:size", (req, res) => {
   const { userId, productId, size } = req.params;
 
-  // Validate input
   if (!userId || !productId || !size) {
     return res
       .status(400)
       .json({ error: "User ID, Product ID, and Size are required" });
   }
 
-  // Log the input to see if they're correct
   console.log(
     `Deleting item from cart: user_id=${userId}, product_id=${productId}, size=${size}`
   );
@@ -266,27 +300,22 @@ app.delete("/cart/:userId/:productId/:size", (req, res) => {
     WHERE user_id = ? AND product_id = ? AND size = ?
   `;
 
-  // Execute the query to remove the specific cart item
   db.query(sql, [userId, productId, size], (err, result) => {
     if (err) {
       console.error("Error removing item from cart:", err);
       return res.status(500).json({ error: "Error removing item from cart" });
     }
 
-    // Log the result of the query
     console.log("Delete result:", result);
 
-    // Check if any rows were affected
     if (result.affectedRows === 0) {
       return res.status(404).json({ error: "Item not found in cart" });
     }
 
-    // Successfully removed item
     res.status(200).json({ message: "Item removed from cart" });
   });
 });
 
-// Set up server to listen on port 8081
 app.listen(8081, () => {
   console.log("Server is running on port 8081");
 });

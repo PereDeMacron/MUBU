@@ -18,10 +18,12 @@ const ManageProducts = () => {
   const fetchItems = async () => {
     try {
       const response = await axios.get("http://localhost:8081/items");
-      console.log("Fetched items:", response.data);
-      setItems(response.data);
+      if (response.status === 200) {
+        setItems(response.data);
+      }
     } catch (error) {
       console.error("Error fetching items:", error);
+      alert("There was an error fetching the items.");
     }
   };
 
@@ -48,8 +50,6 @@ const ManageProducts = () => {
   const handleSaveItem = async () => {
     if (editingItem) {
       try {
-        console.log("Updating item with ID:", editingItem.id);
-        console.log("Data being sent:", newItem); // Log data being sent
         await axios.put(
           `http://localhost:8081/items/${editingItem.id}`,
           newItem
@@ -59,16 +59,20 @@ const ManageProducts = () => {
         fetchItems();
       } catch (error) {
         console.error("Error updating item:", error);
+        alert("There was an error updating the item.");
       }
     }
   };
 
   const handleDeleteItem = async (id) => {
     try {
-      await axios.delete(`http://localhost:8081/items/${id}`);
-      fetchItems();
+      const response = await axios.delete(`http://localhost:8081/items/${id}`);
+      console.log(response.data.message);
     } catch (error) {
-      console.error("Error deleting item:", error);
+      console.error(
+        "Error deleting item:",
+        error.response ? error.response.data : error.message
+      );
     }
   };
 
@@ -89,7 +93,7 @@ const ManageProducts = () => {
       />
       <input
         type="text"
-        placeholder="Label"
+        placeholder="Label (Price)"
         value={newItem.label}
         onChange={(e) => setNewItem({ ...newItem, label: e.target.value })}
       />
@@ -114,7 +118,6 @@ const ManageProducts = () => {
               alt={item.alt}
               style={{ width: "100px", height: "auto", marginLeft: "10px" }}
             />{" "}
-            {/* Display image */}
             <button onClick={() => handleEditItem(item)}>Edit</button>
             <button onClick={() => handleDeleteItem(item.id)}>Delete</button>
           </li>

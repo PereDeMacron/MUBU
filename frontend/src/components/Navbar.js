@@ -43,7 +43,6 @@ function Navbar() {
                 Home
               </Link>
             </li>
-            <li className="nav-item"></li>
             <li className="nav-item">
               <Link
                 to="/products"
@@ -53,7 +52,6 @@ function Navbar() {
                 Products
               </Link>
             </li>
-
             <li>
               {isLoggedIn ? (
                 <Link
@@ -74,6 +72,11 @@ function Navbar() {
               )}
             </li>
           </ul>
+
+          <Link to="/cart" className="nav-links">
+            <i className="fas fa-shopping-cart"></i>
+          </Link>
+
           {button && (
             <Button
               buttonStyle="btn--outline"

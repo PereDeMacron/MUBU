@@ -11,7 +11,6 @@ function ProductPage() {
   const [loading, setLoading] = useState(true);
   const [userId, setUserId] = useState(null);
 
-  // Fetch the userId from localStorage on component mount
   useEffect(() => {
     const storedUserId = localStorage.getItem("userId");
     if (!storedUserId) {
@@ -22,7 +21,6 @@ function ProductPage() {
     }
   }, [navigate]);
 
-  // Fetch the product details based on productId
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -56,7 +54,7 @@ function ProductPage() {
   useEffect(() => {
     const userDetails = JSON.parse(localStorage.getItem("UserDetails"));
     if (userDetails && userDetails.userId) {
-      setUserId(userDetails.userId); // Set userId in your component state if needed
+      setUserId(userDetails.userId);
     } else {
       console.error("User ID is missing in localStorage");
     }
@@ -70,25 +68,22 @@ function ProductPage() {
     return <div>Product not found</div>;
   }
 
-  // Handle the size selection
   const handleSizeSelect = (size) => {
     setSelectedSize(size);
   };
 
-  // Handle adding the product to the cart
   const handleAddToCart = () => {
     if (userId) {
-      console.log(`User ID: ${userId}`); // You can log and see the userId here
-      // Send the request to the backend with userId
+      console.log(`User ID: ${userId}`);
       fetch("http://localhost:8081/cart", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          userId: userId, // Send userId in the request
-          productId: product.id, // Example productId
-          size: selectedSize, // Example size
+          userId: userId,
+          productId: product.id,
+          size: selectedSize,
         }),
       })
         .then((response) => response.json())
