@@ -13,7 +13,7 @@ function Products() {
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const response = await axios.get("http://localhost:8081/items");
+        const response = await axios.get("https://mubu.herokuapp.com/items");
         const productsWithPrice = response.data.map((product) => ({
           ...product,
           price: parseFloat(product.label),

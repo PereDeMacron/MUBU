@@ -17,7 +17,7 @@ const ManageProducts = () => {
 
   const fetchItems = async () => {
     try {
-      const response = await axios.get("http://localhost:8081/items");
+      const response = await axios.get("https://mubu.herokuapp.com/items");
       if (response.status === 200) {
         setItems(response.data);
       }
@@ -29,7 +29,7 @@ const ManageProducts = () => {
 
   const handleAddItem = async () => {
     try {
-      await axios.post("http://localhost:8081/items", newItem);
+      await axios.post("https://mubu.herokuapp.com/items", newItem);
       setNewItem({ text: "", src: "", label: "", alt: "" });
       fetchItems();
     } catch (error) {
@@ -51,7 +51,7 @@ const ManageProducts = () => {
     if (editingItem) {
       try {
         await axios.put(
-          `http://localhost:8081/items/${editingItem.id}`,
+          `https://mubu.herokuapp.com/items/${editingItem.id}`,
           newItem
         );
         setEditingItem(null);
@@ -66,7 +66,9 @@ const ManageProducts = () => {
 
   const handleDeleteItem = async (id) => {
     try {
-      const response = await axios.delete(`http://localhost:8081/items/${id}`);
+      const response = await axios.delete(
+        `https://mubu.herokuapp.com/items/${id}`
+      );
       console.log(response.data.message);
     } catch (error) {
       console.error(

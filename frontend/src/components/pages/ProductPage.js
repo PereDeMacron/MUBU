@@ -25,7 +25,7 @@ function ProductPage() {
     const fetchProduct = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8081/items/${productId}`
+          `https://mubu.herokuapp.comitems/${productId}`
         );
         if (!response.ok) {
           throw new Error("Product not found");
@@ -75,7 +75,7 @@ function ProductPage() {
   const handleAddToCart = () => {
     if (userId) {
       console.log(`User ID: ${userId}`);
-      fetch("http://localhost:8081/cart", {
+      fetch("https://mubu.herokuapp.com/cart", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -14,8 +14,8 @@ function SignUpLogin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const url = isLogin
-      ? "http://localhost:8081/login"
-      : "http://localhost:8081/signup";
+      ? "https://mubu.herokuapp.com/login"
+      : "https://mubu.herokuapp.com/signup";
     const data = isLogin
       ? { email, password }
       : { first_name: firstName, last_name: lastName, email, password };

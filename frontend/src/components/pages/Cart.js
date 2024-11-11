@@ -22,7 +22,9 @@ const Cart = () => {
 
       setIsLoading(true);
       try {
-        const response = await fetch(`http://localhost:8081/cart/${userId}`);
+        const response = await fetch(
+          `https://mubu.herokuapp.com/cart/${userId}`
+        );
         if (response.ok) {
           const data = await response.json();
           setCartItems(data);
@@ -53,7 +55,7 @@ const Cart = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:8081/cart/${userId}/${productId}`,
+        `https://mubu.herokuapp.com/cart/${userId}/${productId}`,
         {
           method: "DELETE",
         }
@@ -88,9 +90,12 @@ const Cart = () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:8081/cart/${userId}`, {
-        method: "DELETE",
-      });
+      const response = await fetch(
+        `https://mubu.herokuapp.com/cart/${userId}`,
+        {
+          method: "DELETE",
+        }
+      );
 
       if (response.ok) {
         setCartItems([]);
