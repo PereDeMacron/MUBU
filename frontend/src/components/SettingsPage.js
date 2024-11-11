@@ -20,7 +20,7 @@ function SettingsPage() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "https://mubu.herokuapp.com/change-password",
+        "http://localhost:8081/change-password",
         {
           currentPassword,
           newPassword,
@@ -35,7 +35,7 @@ function SettingsPage() {
 
   const handleLogout = async () => {
     try {
-      const response = await axios.post("https://mubu.herokuapp.com/logout");
+      const response = await axios.post("http://localhost:8081/logout");
       if (response.status === 200) {
         localStorage.removeItem("isLoggedIn");
         localStorage.removeItem("token");
@@ -60,7 +60,7 @@ function SettingsPage() {
           setUserDetails(JSON.parse(userInfo));
         } else {
           const response = await axios.get(
-            "https://mubu.herokuapp.com/user-details"
+            "http://localhost:8081/user-details"
           );
           setUserDetails(response.data);
           localStorage.setItem("userDetails", JSON.stringify(response.data));
@@ -73,7 +73,7 @@ function SettingsPage() {
 
     const fetchOrders = async () => {
       try {
-        const response = await axios.get("https://mubu.herokuapp.com/orders");
+        const response = await axios.get("http://localhost:8081/orders");
         setOrders(response.data);
       } catch (error) {
         console.error("Error fetching orders:", error);

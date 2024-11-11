@@ -56,16 +56,16 @@ h1 {
 }
 
 .item-name {
-  margin-top: 100px;
-  font-size: 18px;
-  text-align: center;
-  font-size: 32px;
+  margin-top: 90px;
+  text-align: left;
+  font-size: 50px;
 }
 
 .price {
-  margin-top: 100px;
-  font-size: 18px;
-  text-align: center;
+  margin-top: 32px;
+  font-size: 36px;
+  text-align: left;
+  margin-left: 5px;
 }
 
 .select-size-btn {

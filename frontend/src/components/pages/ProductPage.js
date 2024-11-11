@@ -25,7 +25,7 @@ function ProductPage() {
     const fetchProduct = async () => {
       try {
         const response = await fetch(
-          `https://mubu.herokuapp.comitems/${productId}`
+          `http://localhost:8081/items/${productId}`
         );
         if (!response.ok) {
           throw new Error("Product not found");
@@ -34,10 +34,10 @@ function ProductPage() {
         setProduct({
           ...data,
           sizes: [
-            { size: "S", available: true },
-            { size: "M", available: false },
-            { size: "L", available: true },
-            { size: "XL", available: true },
+            { size: "41", available: true },
+            { size: "42", available: false },
+            { size: "43", available: true },
+            { size: "44", available: true },
           ],
         });
       } catch (error) {
@@ -75,7 +75,7 @@ function ProductPage() {
   const handleAddToCart = () => {
     if (userId) {
       console.log(`User ID: ${userId}`);
-      fetch("https://mubu.herokuapp.com/cart", {
+      fetch("http://localhost:8081/cart", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

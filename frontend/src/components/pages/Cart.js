@@ -22,9 +22,7 @@ const Cart = () => {
 
       setIsLoading(true);
       try {
-        const response = await fetch(
-          `https://mubu.herokuapp.com/cart/${userId}`
-        );
+        const response = await fetch(`http://localhost:8081/cart/${userId}`);
         if (response.ok) {
           const data = await response.json();
           setCartItems(data);
@@ -49,20 +47,23 @@ const Cart = () => {
 
   const removeFromCart = async (productId) => {
     if (!userId) {
-      alert("You must be logged in to remove items from the cart.");
+      console.log("You must be logged in to remove items from the cart.");
       return;
     }
 
     try {
+      console.log("Removing item:", userId, productId);
+
       const response = await fetch(
-        `https://mubu.herokuapp.com/cart/${userId}/${productId}`,
+        `http://localhost:8081/cart/${userId}/${productId}`,
         {
           method: "DELETE",
         }
       );
 
       if (response.ok) {
-        alert("Item removed from cart");
+        const successData = await response.json();
+        console.log(successData.message);
 
         setCartItems((prevItems) => {
           const updatedItems = prevItems.filter(
@@ -76,7 +77,8 @@ const Cart = () => {
           return updatedItems;
         });
       } else {
-        alert("Error removing item from cart");
+        const errorData = await response.json();
+        console.log(errorData.message || "Error removing item from cart");
       }
     } catch (error) {
       console.error("Error removing item from cart:", error);
@@ -90,12 +92,9 @@ const Cart = () => {
     }
 
     try {
-      const response = await fetch(
-        `https://mubu.herokuapp.com/cart/${userId}`,
-        {
-          method: "DELETE",
-        }
-      );
+      const response = await fetch(`http://localhost:8081/cart/${userId}`, {
+        method: "DELETE",
+      });
 
       if (response.ok) {
         setCartItems([]);
