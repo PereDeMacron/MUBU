@@ -1,20 +1,24 @@
 require("dotenv").config();
 
-const mysql = require("mysql"); // Add this line at the top
 const express = require("express"); // Web server framework
+const mysql = require("mysql2"); // MySQL db client
 const cors = require("cors"); // Cross Origin Resource Sharing
-const bcrypt = require("bcrypt"); // Password hasher
-const app = express(); // Express app
+const bcrypt = require("bcrypt"); // Password hashing
+
+const app = express();
 
 app.use(cors());
 app.use(express.json());
 
 const db = mysql.createPool({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_DATABASE,
-  port: process.env.DB_PORT,
+  host: "localhost",
+  user: "root",
+  password: "StrongP@ssw0rd2024!",
+  database: "login_sample_db",
+  port: 3306,
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0,
 });
 
 db.getConnection((err) => {
@@ -140,10 +144,10 @@ app.get("/items", (req, res) => {
     const itemsWithSizes = data.map((item) => ({
       ...item,
       sizes: [
-        { size: "41", available: true },
-        { size: "42", available: false },
-        { size: "43", available: true },
-        { size: "44", available: true },
+        { size: "S", available: true },
+        { size: "M", available: false },
+        { size: "L", available: true },
+        { size: "XL", available: true },
       ],
     }));
     res.status(200).json(itemsWithSizes);
@@ -170,37 +174,28 @@ app.put("/items/:id", (req, res) => {
   });
 });
 
-app.delete("/cart/:userId/:productId", (req, res) => {
-  const { userId, productId } = req.params;
+app.delete("/items/:id", (req, res) => {
+  const itemId = req.params.id;
 
-  const query = "DELETE FROM cart WHERE user_id = ? AND product_id = ?";
+  if (isNaN(itemId)) {
+    return res.status(400).json({ message: "Invalid item ID" });
+  }
 
-  db.query(query, [userId, productId], (err, result) => {
+  const query = "DELETE FROM item WHERE id = ?";
+
+  db.query(query, [itemId], (err, result) => {
     if (err) {
-      console.error("Error deleting cart item:", err);
+      console.error("Error deleting item:", err);
       return res
         .status(500)
-        .json({ message: "Server error while deleting cart item" });
+        .json({ message: "Server error while deleting item" });
     }
 
     if (result.affectedRows > 0) {
-      return res
-        .status(200)
-        .json({ message: "Cart item deleted successfully" });
+      return res.status(200).json({ message: "Item deleted successfully" });
     } else {
-      return res.status(404).json({ message: "Cart item not found" });
+      return res.status(404).json({ message: "Item not found" });
     }
-  });
-});
-
-app.delete("/cart/:userId", (req, res) => {
-  const userId = req.params.userId;
-  db.query("DELETE FROM cart WHERE user_id = ?", [userId], (err, result) => {
-    if (err) {
-      console.error("Error clearing cart:", err);
-      return res.status(500).send("Error clearing cart");
-    }
-    res.status(200).send("Cart cleared successfully");
   });
 });
 
@@ -235,7 +230,6 @@ app.post("/items", (req, res) => {
 app.post("/cart", (req, res) => {
   const { productId, size } = req.body;
   const userId = req.body.userId || req.headers["user-id"];
-
   if (!userId) {
     return res
       .status(400)
@@ -277,40 +271,25 @@ app.get("/cart/:userId", (req, res) => {
   });
 });
 
-app.delete("/cart/:userId/:productId/:size", (req, res) => {
-  const { userId, productId, size } = req.params;
+app.delete("/cart/:userId/:productId", (req, res) => {
+  const { userId, productId } = req.params;
 
-  if (!userId || !productId || !size) {
-    return res
-      .status(400)
-      .json({ error: "User ID, Product ID, and Size are required" });
-  }
-
-  console.log(
-    `Deleting item from cart: user_id=${userId}, product_id=${productId}, size=${size}`
-  );
-
-  const sql = `
-    DELETE FROM cart 
-    WHERE user_id = ? AND product_id = ? AND size = ?
-  `;
-
-  db.query(sql, [userId, productId, size], (err, result) => {
+  const query = "DELETE FROM cart WHERE user_id = ? AND product_id = ?";
+  db.query(query, [userId, productId], (err, result) => {
     if (err) {
-      console.error("Error removing item from cart:", err);
-      return res.status(500).json({ error: "Error removing item from cart" });
+      console.error("Error deleting item from cart:", err);
+      return res
+        .status(500)
+        .json({ message: "Server error while deleting item" });
     }
-
-    console.log("Delete result:", result);
-
     if (result.affectedRows === 0) {
-      return res.status(404).json({ error: "Item not found in cart" });
+      return res.status(404).json({ message: "Item not found in cart" });
     }
-
-    res.status(200).json({ message: "Item removed from cart" });
+    return res.status(200).json({ message: "Item removed from cart" });
   });
 });
 
+// Set up server to listen on port 8081
 app.listen(8081, () => {
   console.log("Server is running on port 8081");
 });
