@@ -375,6 +375,11 @@
   opacity: 0;
 }
 
+.view-product-button:hover {
+  color: #d8d8d8;
+  background-color: #4e4e4e;
+}
+
 .category-button:focus,
 .view-product-button:focus,
 .dot:focus,

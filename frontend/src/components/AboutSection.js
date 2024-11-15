@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate hook
 import "./AboutSection.css";
 
 const LandingSection = () => {
+  // Initialize navigate function
+  const navigate = useNavigate();
+
   // Defining an array of images for the image carousel
   const images = [
-    "/images/img-1.jpg",
-    "/images/img-2.jpg",
-    "/images/nike-shox-lp.png",
+    "/images/img-1.jpg", // Street Collection image
+    "/images/img-2.jpg", // Urban Collection image
+    "/images/nike-shox-lp.png", // Classic Collection image
   ];
 
   // Using useState hook to manage the current image index for the carousel
@@ -27,6 +31,28 @@ const LandingSection = () => {
   // Function to handle the image change when a dot control is clicked
   const goToSlide = (index) => {
     setCurrentImageIndex(index);
+  };
+
+  // Function to handle the category button click and change the image accordingly
+  const handleCategoryClick = (category) => {
+    switch (category) {
+      case "Street Collection":
+        setCurrentImageIndex(0); // First image
+        break;
+      case "Urban Collection":
+        setCurrentImageIndex(1); // Second image
+        break;
+      case "Classic Collection":
+        setCurrentImageIndex(2); // Third image
+        break;
+      default:
+        setCurrentImageIndex(0);
+    }
+  };
+
+  // Function to handle the "View Products" button click
+  const handleViewProductsClick = () => {
+    navigate("/products"); // Navigate to the /products page
   };
 
   return (
@@ -57,7 +83,11 @@ const LandingSection = () => {
                 "Urban Collection",
                 "Classic Collection",
               ].map((category) => (
-                <button key={category} className="category-button">
+                <button
+                  key={category}
+                  className="category-button"
+                  onClick={() => handleCategoryClick(category)} // Added onClick handler
+                >
                   {category}
                 </button>
               ))}
@@ -65,7 +95,12 @@ const LandingSection = () => {
           </div>
 
           {/* Buttons to view products and about page */}
-          <button className="view-product-button">View Products</button>
+          <button
+            className="view-product-button"
+            onClick={handleViewProductsClick} // Added onClick handler
+          >
+            View Products
+          </button>
           <button className="view-product-button">About</button>
         </div>
 
@@ -110,11 +145,11 @@ const LandingSection = () => {
         {/* Stats section */}
         <div className="stats-section">
           <div className="stat-item">
-            <h2>100+</h2>
+            <h2>99+</h2>
             <p>Happy Clients</p>
           </div>
           <div className="stat-item">
-            <h2>50+</h2>
+            <h2>1</h2>
             <p>Team Members</p>
           </div>
           <div className="stat-item">
@@ -126,7 +161,7 @@ const LandingSection = () => {
         {/* Social media links */}
         <div className="social-links">
           <span>Follow Us</span>
-          {["Instagram", "Twitter", "LinkedIn"].map((social) => (
+          {["Github", "LinkedIn"].map((social) => (
             <button key={social} className="social-button">
               {social}
             </button>
@@ -137,4 +172,4 @@ const LandingSection = () => {
   );
 };
 
-export default LandingSection; // Export the LandingSection component to be use in a page
+export default LandingSection; // Export the LandingSection component to be used in a page
