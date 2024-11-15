@@ -1,9 +1,11 @@
+// Import section
 import React from "react";
 import "../../App.css";
 import Navbar from "../Navbar";
 import SettingsPage from "../SettingsPage";
 import Footer from "../Footer";
 
+// Component for the Account page
 function Account() {
   return (
     <>
@@ -14,4 +16,4 @@ function Account() {
   );
 }
 
-export default Account;
+export default Account; // Exporting the Account component to be used in App.js

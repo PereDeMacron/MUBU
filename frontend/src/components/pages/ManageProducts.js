@@ -1,7 +1,10 @@
+// Import section
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
+// Component for managing products
 const ManageProducts = () => {
+  // State for items and form inputs
   const [items, setItems] = useState([]);
   const [newItem, setNewItem] = useState({
     text: "",
@@ -11,10 +14,12 @@ const ManageProducts = () => {
   });
   const [editingItem, setEditingItem] = useState(null);
 
+  // Fetch products on component mount
   useEffect(() => {
     fetchItems();
   }, []);
 
+  // Fetch all items from the server
   const fetchItems = async () => {
     try {
       const response = await axios.get("http://localhost:8081/items");
@@ -27,6 +32,7 @@ const ManageProducts = () => {
     }
   };
 
+  // Add a new item
   const handleAddItem = async () => {
     try {
       await axios.post("http://localhost:8081/items", newItem);
@@ -37,6 +43,7 @@ const ManageProducts = () => {
     }
   };
 
+  // Prepare an item for editing
   const handleEditItem = (item) => {
     setEditingItem(item);
     setNewItem({
@@ -47,6 +54,7 @@ const ManageProducts = () => {
     });
   };
 
+  // Save edited item
   const handleSaveItem = async () => {
     if (editingItem) {
       try {
@@ -64,10 +72,12 @@ const ManageProducts = () => {
     }
   };
 
+  // Delete an item
   const handleDeleteItem = async (id) => {
     try {
       const response = await axios.delete(`http://localhost:8081/items/${id}`);
       console.log(response.data.message);
+      fetchItems();
     } catch (error) {
       console.error(
         "Error deleting item:",
@@ -79,6 +89,8 @@ const ManageProducts = () => {
   return (
     <div>
       <h1>Manage Products</h1>
+
+      {/* Form for adding/editing items */}
       <input
         type="text"
         placeholder="Text"
@@ -107,6 +119,7 @@ const ManageProducts = () => {
         {editingItem ? "Save Item" : "Add Item"}
       </button>
 
+      {/* List of items */}
       <ul>
         {items.map((item) => (
           <li key={item.id}>
@@ -117,7 +130,7 @@ const ManageProducts = () => {
               src={item.src}
               alt={item.alt}
               style={{ width: "100px", height: "auto", marginLeft: "10px" }}
-            />{" "}
+            />
             <button onClick={() => handleEditItem(item)}>Edit</button>
             <button onClick={() => handleDeleteItem(item.id)}>Delete</button>
           </li>
@@ -127,4 +140,4 @@ const ManageProducts = () => {
   );
 };
 
-export default ManageProducts;
+export default ManageProducts; // Exporting the ManageProducts component to be used in App.js

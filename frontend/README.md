@@ -1,70 +1,82 @@
-# Getting Started with Create React App
+# MUBU
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Hi! I'm your first Markdown file in **StackEdit**. If you want to learn about StackEdit, you can read me. If you want to play with Markdown, you can edit me. Once you have finished with me, you can create new files by opening the **file explorer** on the left corner of the navigation bar.
 
-## Available Scripts
+## Introduction
 
-In the project directory, you can run:
+[MEDIUM POST](https://medium.com/@peredemacron/mubu-105afd02253d)
 
-### `npm start`
+## Installation
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+#### RUN THE APP
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+to install all requirement run in the project folder `npm install`
 
-### `npm test`
+after install the requirement to run the website in frontend folder run `npm start`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### DATABASE
 
-### `npm run build`
+'you must need a database, the website will be blank if not a db is connected'
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+the database table code are:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+###### ITEM TABLE:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
 
-### `npm run eject`
+CREATE TABLE `item` (
+`id` int unsigned NOT NULL AUTO_INCREMENT,
+`text` varchar(255) NOT NULL,
+`src` varchar(255) NOT NULL,
+`label` varchar(255) NOT NULL,
+`alt` varchar(255) NOT NULL,
+PRIMARY KEY (`id`)
+) ENGINE = InnoDB AUTO_INCREMENT = 16 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+###### USERS TABLE:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+CREATE TABLE `users` (
+`user_id` int NOT NULL AUTO_INCREMENT,
+`first_name` varchar(100) DEFAULT NULL,
+`last_name` varchar(100) DEFAULT NULL,
+`email` varchar(100) DEFAULT NULL,
+`password` varchar(255) DEFAULT NULL,
+`is_admin` tinyint(1) DEFAULT '0',
+PRIMARY KEY (`user_id`),
+UNIQUE KEY `email` (`email`)
+) ENGINE = InnoDB AUTO_INCREMENT = 3 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci
 
-## Learn More
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+###### CART TABLE:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
 
-### Code Splitting
+CREATE TABLE `cart` (
+`id` int NOT NULL AUTO_INCREMENT,
+`user_id` int NOT NULL,
+`product_id` int unsigned NOT NULL,
+`size` varchar(10) DEFAULT NULL,
+`quantity` int DEFAULT '1',
+`created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+PRIMARY KEY (`id`),
+KEY `user_id` (`user_id`),
+KEY `product_id` (`product_id`),
+CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
+) ENGINE = InnoDB AUTO_INCREMENT = 38 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```
 
-### Analyzing the Bundle Size
+after creating the table the website will perfectly work
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Usage
 
-### Making a Progressive Web App
+## Contributing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Related projects
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Licensing

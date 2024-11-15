@@ -1,7 +1,9 @@
+// Import section
 import React from "react";
 import "../../App.css";
 import SignUp from "../SignUp";
 
+// SignUpLogin component that renders the SignUp component
 function SignUpLogin() {
   return (
     <>
@@ -10,4 +12,4 @@ function SignUpLogin() {
   );
 }
 
-export default SignUpLogin;
+export default SignUpLogin; // Exporting the SignUpLogin component to be used in App.js

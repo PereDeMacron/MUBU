@@ -1,7 +1,9 @@
+// Import section
 import React from "react";
 import "../../App.css";
 import HeroSection from "../HeroSection";
 
+// Component for the Home page
 function Home() {
   return (
     <>
@@ -10,4 +12,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Home; // Exporting the Home component to be used in App.js

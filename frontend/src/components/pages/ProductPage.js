@@ -1,16 +1,21 @@
+// Import section
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Navbar from "../Navbar";
 import "./ProductPage.css";
 
 function ProductPage() {
+  // Fetch product ID from URL params
   const { productId } = useParams();
   const navigate = useNavigate();
+
+  // State management for product details, size selection, loading, and user ID
   const [product, setProduct] = useState(null);
   const [selectedSize, setSelectedSize] = useState(null);
   const [loading, setLoading] = useState(true);
   const [userId, setUserId] = useState(null);
 
+  // Check if the user is logged in on page load
   useEffect(() => {
     const storedUserId = localStorage.getItem("userId");
     if (!storedUserId) {
@@ -21,6 +26,7 @@ function ProductPage() {
     }
   }, [navigate]);
 
+  // Fetch product details from the API
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -51,6 +57,7 @@ function ProductPage() {
     fetchProduct();
   }, [productId]);
 
+  // Retrieve user details from localStorage
   useEffect(() => {
     const userDetails = JSON.parse(localStorage.getItem("UserDetails"));
     if (userDetails && userDetails.userId) {
@@ -60,18 +67,22 @@ function ProductPage() {
     }
   }, []);
 
+  // If the product is still loading
   if (loading) {
     return <div>Loading...</div>;
   }
 
+  // If no product is found
   if (!product) {
     return <div>Product not found</div>;
   }
 
+  // Handle size selection
   const handleSizeSelect = (size) => {
     setSelectedSize(size);
   };
 
+  // Add selected product to the cart
   const handleAddToCart = () => {
     if (userId) {
       console.log(`User ID: ${userId}`);
@@ -98,13 +109,19 @@ function ProductPage() {
     <div className="product-page">
       <Navbar />
       <div className="product-content">
+        {/* Product image and delivery info */}
         <div className="item-image">
           <img alt={product.alt} src={product.src} />
-          <span className="delivery-time">48H</span>
+          <span className="delivery-time">48H</span>{" "}
+          {/* Delivery time display */}
         </div>
+
+        {/* Product information */}
         <div className="product-info">
           <h1 className="item-name">{product.text}</h1>
           <p className="price">{product.label}</p>
+
+          {/* Size selection */}
           <div className="size-selection">
             <h3>Select your size</h3>
             <div className="size-grid">
@@ -124,9 +141,11 @@ function ProductPage() {
               ))}
             </div>
           </div>
+
+          {/* Add to cart button */}
           <button
             className="add-to-cart-btn"
-            disabled={!selectedSize}
+            disabled={!selectedSize} // Disable button if no size is selected
             onClick={handleAddToCart}
           >
             {selectedSize
@@ -139,4 +158,4 @@ function ProductPage() {
   );
 }
 
-export default ProductPage;
+export default ProductPage; // Exporting the ProductPage component to be used in App.js

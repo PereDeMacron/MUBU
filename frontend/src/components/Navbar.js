@@ -20,12 +20,19 @@ function Navbar() {
   };
 
   useEffect(() => {
-    showButton();
+    // Check if the user is logged in based on localStorage
     const loggedIn = localStorage.getItem("isLoggedIn") === "true";
     setIsLoggedIn(loggedIn);
-  }, []);
 
-  window.addEventListener("resize", showButton);
+    // Check button visibility on initial load
+    showButton();
+
+    // Cleanup resize event listener when the component unmounts
+    window.addEventListener("resize", showButton);
+    return () => {
+      window.removeEventListener("resize", showButton);
+    };
+  }, []);
 
   return (
     <>
