@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/mubu/static/css/main.7ccf10fd.css",
+    "main.js": "/mubu/static/js/main.3813ddf3.js",
+    "static/media/img-8.jpg": "/mubu/static/media/img-8.c034239ee9a63564602b.jpg",
+    "static/media/img-2.jpg": "/mubu/static/media/img-2.4adf6281709e8f6878a1.jpg",
+    "static/media/img-1.jpg": "/mubu/static/media/img-1.e06adb35655091d33f8a.jpg",
+    "index.html": "/mubu/index.html",
+    "main.7ccf10fd.css.map": "/mubu/static/css/main.7ccf10fd.css.map",
+    "main.3813ddf3.js.map": "/mubu/static/js/main.3813ddf3.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7ccf10fd.css",
+    "static/js/main.3813ddf3.js"
+  ]
+}
